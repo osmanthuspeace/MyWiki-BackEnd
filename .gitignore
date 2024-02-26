@@ -1,0 +1,23 @@
+# Rider
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# VS Code directories
+.vscode/
+
+# VS
+.vs/
+
+# MacOS
+.DS_Store
+
+# Dotnet
+bin/
+obj/
+Migration/
