@@ -9,6 +9,7 @@ using MyWiki.Models;
 using MyWiki.Service.EntryService;
 using MyWiki.Service.PictureService;
 using MyWiki.Service.UserService;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectString = builder.Configuration.GetConnectionString("WikiContext");
@@ -21,7 +22,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        policyBuilder => policyBuilder.WithOrigins("http://localhost:8080")
+        policyBuilder => policyBuilder
+            .WithOrigins("http://localhost:8080")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
@@ -41,10 +43,28 @@ builder.Services.AddAuthentication(options=>
     {
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = true,
+        // ValidateLifetime = true,
         ValidIssuer = JwtToken.Issuer,
         ValidAudience = JwtToken.Audience,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtToken.Secret))
+    };
+    o.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
+        {
+            if (context.Exception.GetType() != typeof(SecurityTokenExpiredException)) return Task.CompletedTask;
+            context.Response.Headers.Append("Token-Expired", "true");
+            context.Response.StatusCode = 401;
+            context.Response.ContentType = "application/json";
+            return context.Response.WriteAsync(
+                JsonConvert.SerializeObject(
+                    new
+                    {
+                        error = "The token is out-date"
+                    })
+            );
+        },
+        // 可以添加其他事件处理...
     };
 });
 
@@ -57,15 +77,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthentication();
-app.UseHttpsRedirection();//无需更改特性，强制使用 HTTPS
-app.UseAuthorization();
-
 app.UseCors("AllowSpecificOrigin");
+
+// app.UseHttpsRedirection();//无需更改特性，强制使用 HTTPS
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
-
 app.MapControllers();
 
 app.Run();

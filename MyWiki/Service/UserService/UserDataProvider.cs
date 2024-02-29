@@ -88,6 +88,19 @@ public class UserDataProvider(WikiContext context):IUserDataProvider
         if (existUser!=null) throw new Exception("该用户名已存在");
         return false;
     }
+
+    public async Task<DisplayUsersDto> GetUserInfoByName(string name)
+    {
+        var user =await context.Users
+            .Include(user => user.Role)
+            .FirstOrDefaultAsync(u => u.Name == name);
+        if (user == null) throw new Exception("There is no user of the name");
+        return new DisplayUsersDto
+        {
+            Name = user.Name,
+            RoleName = user.Role.RoleName
+        };
+    }
     
     private async Task<Role> GetOrCreateRole(string roleName)
     {

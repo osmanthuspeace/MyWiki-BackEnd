@@ -10,4 +10,5 @@ public interface IUserDataProvider
     public Task<IEnumerable<string>> GetUsersByRole(string roleName);
     public Task<List<DisplayUsersDto>> GetUsers();
     public Task<bool> CheckUserName(string name);
+    public Task<DisplayUsersDto> GetUserInfoByName(string name);
 }

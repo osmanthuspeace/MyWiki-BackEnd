@@ -10,7 +10,7 @@ namespace MyWiki.Service.EntryService;
 
 public class EntryDataProvider(WikiContext context):IEntryDataProvider
 {
-    // GET: 通过Id获取单个词条
+    // 通过Id获取单个词条
     public async Task<EntryDto> GetEntryById(int id)
     {
         var entry = await context.Entries
@@ -28,13 +28,14 @@ public class EntryDataProvider(WikiContext context):IEntryDataProvider
         };
     }
     
-    //GET: 通过Title获取词条
+    // 通过Title获取词条
     public async Task<List<EntryDto>> GetEntriesByTitle(string title,int page,int pageSize)
     {
         var skipCount = (page - 1) * pageSize;
         if (title.IsNullOrEmpty()) throw new Exception("please specify the title");
         var entries = await context.Entries
             .Where(entry => entry.Title.Contains(title))
+            .OrderBy(e=>e)
             .Include(e=>e.Tags)
             // .Include(entry => entry.Category)
             .Skip(skipCount)
@@ -51,7 +52,7 @@ public class EntryDataProvider(WikiContext context):IEntryDataProvider
         }).ToList();
     }
     
-    //GET: 通过Tags获取词条
+    // 通过Tags获取词条
     public async Task<ICollection<EntryDto>> GetEntriesByTags([FromQuery]List<string>? tagNames,int page,int pageSize)
     {
         var skipCount = (page - 1) * pageSize;
@@ -75,7 +76,7 @@ public class EntryDataProvider(WikiContext context):IEntryDataProvider
         }).ToList();
     }
     
-    //GET: 通过Category获取词条
+    // 通过Category获取词条
     public async Task<ICollection<EntryDto>> GetEntriesByCategory(string categoryName,int page,int pageSize)
     {
 
@@ -105,12 +106,13 @@ public class EntryDataProvider(WikiContext context):IEntryDataProvider
         }).ToList();
     }
 
-    // GET: 展示所有词条
+    // 展示所有词条
     public async Task<IEnumerable<EntryDto>> GetEntries(int page,int pageSize)
     {
         var skipCount = (page - 1) * pageSize;
         var entries=await context.Entries
             // .Include(entry => entry.Category!)
+            .OrderBy(e=>e)
             .Include(e=>e.Tags)
             .Skip(skipCount)
             .Take(pageSize)
@@ -126,7 +128,7 @@ public class EntryDataProvider(WikiContext context):IEntryDataProvider
         }).ToList();
     }
     
-    //POST: 新建/编辑词条
+    // 新建词条
     public async Task<string> PostEntry(EntryDto entryDto)
     {
         //检查是否有已存在的词条
@@ -172,46 +174,41 @@ public class EntryDataProvider(WikiContext context):IEntryDataProvider
         return "Post success!";
     }
     
-    //PUT: 编辑词条
+    // 编辑词条
     public async Task<string> UpdateEntry(EntryDto entryDto)
     {
-        var previousEntry = await context.Entries.FirstOrDefaultAsync(e => e.Title == entryDto.Title);
-        if (previousEntry == null) throw new Exception("The Entry isn't exist!");
-        context.Entries.Remove(previousEntry);
+        var entry = await context.Entries
+            .Include(e => e.Tags)
+            .FirstOrDefaultAsync(e => e.EntryId == entryDto.Id);
+        if (entry == null) throw new Exception("The Entry isn't exist!");
+        
+        entry.Title = entryDto.Title;
+        entry.Content = entryDto.Content;
+        
         var tagsInDto = entryDto.TagNames;
-        var entry = new Entry
+        var existingTags = await context.Tags.ToListAsync();
+        var updatedTags = new List<Tag>();
+        foreach (var tagName in tagsInDto)
         {
-            Title = entryDto.Title,
-            Content = entryDto.Content,
-            Category = null
-        };
-        var existingTags = await context.Tags
-            .Where(tagInDataBase => tagsInDto.Contains(tagInDataBase.TagName))
-            .ToListAsync(); 
-        foreach (var tagInDto in tagsInDto)
-        {
-            var existingTag = existingTags.FirstOrDefault(tag => tag.TagName == tagInDto);
-            var newTag = new Tag
+            var tag = existingTags.FirstOrDefault(tag => tag.TagName == tagName);
+            if (tag == null)
             {
-                TagName = tagInDto
-            };
-            if (existingTag == null)
-            {
-                entry.Tags.Add(newTag);
-                newTag.Entries?.Add(entry);
+                tag = new Tag { TagName = tagName };
+                entry.Tags.Add(tag);
+                tag.Entries?.Add(entry);
             }
-            else
-            {
-                entry.Tags.Add(existingTag);
-                existingTag.Entries?.Add(entry);
-            }
+            updatedTags.Add(tag);
         }
-        await context.Entries.AddAsync(entry);
+        entry.Tags.Clear();
+        foreach (var tag in updatedTags)
+        {
+            entry.Tags.Add(tag); // 添加新的标签关联
+        }
         await context.SaveChangesAsync();
         return "Update success!";
     }
     
-    //DELETE：删除词条
+    // 删除词条
     public async Task<string> DeleteEntry(string title)
     {
         var entry = await context.Entries.FirstOrDefaultAsync(e=>e.Title==title);
@@ -223,7 +220,7 @@ public class EntryDataProvider(WikiContext context):IEntryDataProvider
         return "Delete success";
     }
 
-    //GET: 获取词条总数
+    // 获取词条总数
     public int GetEntryTotal()
     {
         var total = context.Entries.Count();
@@ -231,7 +228,7 @@ public class EntryDataProvider(WikiContext context):IEntryDataProvider
         return total;
     }
 
-    //GET: 获取所有标签
+    // 获取所有标签
     public Task<List<Tag>> GetTags()
     {
         var tags = context.Tags

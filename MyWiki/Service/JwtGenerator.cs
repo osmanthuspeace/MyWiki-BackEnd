@@ -13,7 +13,6 @@ public abstract class JwtGenerator
 {
     public static string GenerateJwt(User userInfo)
     {
-        
         var credentials = new SigningCredentials(
             new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(JwtToken.Secret)), 

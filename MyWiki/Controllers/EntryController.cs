@@ -79,7 +79,7 @@ public class EntryController(IEntryDataProvider entryDataProviderService) : Cont
     
     //POST: 新建词条
     [HttpPost]
-    public async Task<ActionResult<Entry>> PostEntry([FromForm]EntryDto entryDto)
+    public async Task<ActionResult<Entry>> PostEntry(EntryDto entryDto)
     {
         try
         {

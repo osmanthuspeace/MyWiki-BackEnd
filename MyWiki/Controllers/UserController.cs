@@ -93,10 +93,32 @@ public class UserController(IUserDataProvider userDataProvider) : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest(true);//重复，则不能用这个用户名
+            return BadRequest(ex.Message);//重复，则不能用这个用户名
+        }
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<ActionResult<DisplayUsersDto>> GetUserInfoByName(string name)
+    {
+        try
+        {
+            return Ok(await userDataProvider.GetUserInfoByName(name));
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
         }
     }
     
+    [HttpPost]
+    [Authorize]
+    public IActionResult CheckToken()
+    {
+        var staff = User.FindFirstValue(ClaimTypes.Role);
+        if (staff == "Admin") return Ok();
+        return Ok(staff);
+    }
     
     //测试身份验证
     [HttpPost]//用get会返回405
