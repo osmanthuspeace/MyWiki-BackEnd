@@ -1,6 +1,6 @@
 using MyWiki.Entity;
 
-namespace MyWiki.Application;
+namespace MyWiki.Service.Interface;
 
 public interface IPictureProvider
 {

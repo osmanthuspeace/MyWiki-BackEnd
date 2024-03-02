@@ -1,9 +1,9 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyWiki.Application;
 using MyWiki.Entity.EntryEntity;
-using MyWiki.Service.DtoService;
+using MyWiki.Models.Dtos;
+using MyWiki.Service.Interface;
 
 namespace MyWiki.Controllers;
 
@@ -73,7 +73,7 @@ public class EntryController(IEntryDataProvider entryDataProviderService) : Cont
         }
         catch (Exception ex)
         {
-            return NotFound(ex.Message);
+            return NotFound();
         }
     }
     

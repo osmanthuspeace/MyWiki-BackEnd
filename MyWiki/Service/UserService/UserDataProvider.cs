@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using MyWiki.Application;
 using MyWiki.Data;
 using MyWiki.Entity.UserEntity;
-using MyWiki.Service.DtoService;
+using MyWiki.Models.Dtos;
+using MyWiki.Service.Interface;
 
 namespace MyWiki.Service.UserService;
 

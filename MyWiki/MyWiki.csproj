@@ -41,4 +41,8 @@
       <None Remove="Service\PasswordHasher\**" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Application\" />
+    </ItemGroup>
+
 </Project>

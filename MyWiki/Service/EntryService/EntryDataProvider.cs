@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using MyWiki.Application;
 using MyWiki.Data;
 using MyWiki.Entity.EntryEntity;
-using MyWiki.Service.DtoService;
+using MyWiki.Models.Dtos;
+using MyWiki.Service.Interface;
 
 namespace MyWiki.Service.EntryService;
 

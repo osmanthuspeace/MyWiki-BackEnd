@@ -1,6 +1,6 @@
-using MyWiki.Service.DtoService;
+using MyWiki.Models.Dtos;
 
-namespace MyWiki.Application;
+namespace MyWiki.Service.Interface;
 
 public interface IUserDataProvider
 {

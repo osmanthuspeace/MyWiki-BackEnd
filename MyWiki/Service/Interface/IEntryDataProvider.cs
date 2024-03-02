@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MyWiki.Entity.EntryEntity;
-using MyWiki.Service.DtoService;
+using MyWiki.Models.Dtos;
 
-namespace MyWiki.Application;
+namespace MyWiki.Service.Interface;
 
 public interface IEntryDataProvider
 {

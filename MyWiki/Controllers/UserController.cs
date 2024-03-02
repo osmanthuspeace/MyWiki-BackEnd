@@ -1,8 +1,8 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyWiki.Application;
-using MyWiki.Service.DtoService;
+using MyWiki.Models.Dtos;
+using MyWiki.Service.Interface;
 
 namespace MyWiki.Controllers;
 

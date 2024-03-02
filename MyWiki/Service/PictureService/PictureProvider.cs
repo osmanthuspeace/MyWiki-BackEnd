@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
-using MyWiki.Application;
 using MyWiki.Data;
 using MyWiki.Entity;
+using MyWiki.Service.Interface;
 
 namespace MyWiki.Service.PictureService;
 
-public class PictureProvider(WikiContext context,IWebHostEnvironment hostEnvironment):IPictureProvider
+//现在picture provider还依赖于wiki context，理论上不应该这样，而是应该依赖仓储层
+
+public class PictureProvider(WikiContext context, IWebHostEnvironment hostEnvironment) : IPictureProvider
 {
     //POST:上传图片
     public async Task<Picture> UploadPicture(IFormFile pic)
@@ -16,11 +18,12 @@ public class PictureProvider(WikiContext context,IWebHostEnvironment hostEnviron
         var picPath = Path.Combine(rootPath, "uploads", picName);
         await using var stream = new FileStream(picPath, FileMode.Create);
         await pic.CopyToAsync(stream);
-        var picture = new Picture { PictureUrl = picPath }; 
-        context.Pictures.Add(picture); 
+        var picture = new Picture { PictureUrl = picPath };
+        context.Pictures.Add(picture);
         await context.SaveChangesAsync();
-        return picture;//Save之后，Id会被数据库自动填充
+        return picture; //Save之后，Id会被数据库自动填充
     }
+
     //GET:根据Id获取图片
     public async Task<string> GetPictureById(int id)
     {

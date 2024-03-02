@@ -1,4 +1,4 @@
-namespace MyWiki.Service.DtoService;
+namespace MyWiki.Models.Dtos;
 
 public class LoginDto
 {

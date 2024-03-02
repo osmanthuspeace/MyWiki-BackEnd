@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using MyWiki.Application;
+using MyWiki.Service.Interface;
 
 namespace MyWiki.Controllers;
 
