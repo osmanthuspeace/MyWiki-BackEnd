@@ -10,6 +10,7 @@ public static class WebApplicationExtension
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
         app.UseCors("AllowSpecificOrigin");
         // app.UseExceptionHandler(op => { });
         app.UseAuthentication();
@@ -19,5 +20,5 @@ public static class WebApplicationExtension
         app.UseStaticFiles();
 
         app.MapControllers();
-    }   
+    }
 }

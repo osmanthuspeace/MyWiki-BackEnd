@@ -4,17 +4,17 @@ using MyWiki.Entity.EntryEntity;
 
 namespace MyWiki.Data.DataBaseConfiguration;
 
-public class EntryConfig:IEntityTypeConfiguration<Entry>
+public class EntryConfig : IEntityTypeConfiguration<Entry>
 {
     public void Configure(EntityTypeBuilder<Entry> builder)
     {
         builder
-            .HasMany(et => et.Tags) 
-            .WithMany(e => e.Entries) 
+            .HasMany(et => et.Tags)
+            .WithMany(e => e.Entries)
             .UsingEntity(
                 "EntryTag",
                 l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagsId").HasPrincipalKey(nameof(Tag.TagId)),
-                r => r.HasOne(typeof(Entry)).WithMany().HasForeignKey("EntryId").HasPrincipalKey(nameof(Entity.EntryEntity.Entry.EntryId)),
+                r => r.HasOne(typeof(Entry)).WithMany().HasForeignKey("EntryId").HasPrincipalKey(nameof(Entry.EntryId)),
                 j => j.HasKey("EntryId", "TagsId"));
         builder
             .HasOne(et => et.Category)

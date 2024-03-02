@@ -19,7 +19,7 @@ public class WikiContext(DbContextOptions<WikiContext> options) : DbContext(opti
     {
         modelBuilder.ApplyConfiguration(new UserConfig());
         modelBuilder.ApplyConfiguration(new EntryConfig());
-        
+
         base.OnModelCreating(modelBuilder);
     }
 }

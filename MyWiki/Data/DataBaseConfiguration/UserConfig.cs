@@ -4,7 +4,7 @@ using MyWiki.Entity.UserEntity;
 
 namespace MyWiki.Data.DataBaseConfiguration;
 
-public class UserConfig:IEntityTypeConfiguration<User>
+public class UserConfig : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {

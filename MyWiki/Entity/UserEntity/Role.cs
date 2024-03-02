@@ -5,9 +5,9 @@ namespace MyWiki.Entity.UserEntity;
 
 public class Role
 {
-    [Key]
-    public int RoleId { get; set; }
+    [Key] public int RoleId { get; set; }
+
     public string RoleName { get; set; }
-    [JsonIgnore]
-    public ICollection<User> Users { get; set; } = [];
+
+    [JsonIgnore] public ICollection<User> Users { get; set; } = [];
 }

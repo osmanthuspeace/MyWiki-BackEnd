@@ -19,7 +19,7 @@ public static class WebApplicationBuilderExtension
         var connectString = builder.Configuration.GetConnectionString("WikiContext");
         builder.Services.AddDbContext<WikiContext>(o =>
             o.UseNpgsql(connectString));
-        
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
@@ -31,18 +31,18 @@ public static class WebApplicationBuilderExtension
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
-        });//配置同源策略
-        builder.Services.AddScoped<IEntryDataProvider,EntryDataProvider>();
-        builder.Services.AddScoped<IUserDataProvider,UserDataProvider>();
-        builder.Services.AddScoped<IPictureProvider,PictureProvider>();
-        
-        builder.Services.AddAuthentication(options=>
+        }); //配置同源策略
+        builder.Services.AddScoped<IEntryDataProvider, EntryDataProvider>();
+        builder.Services.AddScoped<IUserDataProvider, UserDataProvider>();
+        builder.Services.AddScoped<IPictureProvider, PictureProvider>();
+
+        builder.Services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer( o =>
+        }).AddJwtBearer(o =>
         {
-            o.TokenValidationParameters = new TokenValidationParameters//指定要验证什么，验证的标准是什么，以及用于验证签名的密钥是什么
+            o.TokenValidationParameters = new TokenValidationParameters //指定要验证什么，验证的标准是什么，以及用于验证签名的密钥是什么
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
@@ -66,7 +66,7 @@ public static class WebApplicationBuilderExtension
                                 error = "The token is out-date"
                             })
                     );
-                },
+                }
                 // 可以添加其他事件处理...
             };
         });

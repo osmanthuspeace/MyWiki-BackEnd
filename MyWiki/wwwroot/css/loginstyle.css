@@ -1,24 +1,25 @@
-body
-{
+body {
     /* width:100vw;
     height:80vh; */
-    background-image:url('../img/login_pc.jpg');
+    background-image: url('../img/login_pc.jpg');
     background-position: center;
-    background-size:100% 100%;
+    background-size: 100% 100%;
     box-sizing: border-box;
     background-color: green;
     background-repeat: no-repeat;
 }
+
 @media (max-width: 600px) {
     body {
         /* width:100vw;*/
-        height:100vh; 
-        background-image:url('../img/login_phone.png');
+        height: 100vh;
+        background-image: url('../img/login_phone.png');
         background-position: center;
-        background-size:100%;
+        background-size: 100%;
         background-repeat: no-repeat;
     }
-    body .login{
+
+    body .login {
         width: 80vw;
         align-items: center;
         height: 50vh;
@@ -27,45 +28,50 @@ body
         margin: 15vh 10vw 5vh 10vw;
         /* background-color: red; */
     }
-    body .login .bod{
+
+    body .login .bod {
         display: flex;
-        font-size:1.1rem;
+        font-size: 1.1rem;
         width: 80vw;
         height: 4.5vh;
         padding: 1rem 0 1rem 2vw;
         border: solid;
-        border-width:1px;
+        border-width: 1px;
         border-radius: 25px;
         border-color: gray;
         box-sizing: border-box;
     }
-    body #log{
+
+    body #log {
         /* 登录按钮 */
         width: 80vw;
         height: 4.5vh;
         border: none;
         border-radius: 20px;
         color: white;
-        background-color:orangered ;
+        background-color: orangered;
         font-size: 1.3rem;
     }
-    body .line{
+
+    body .line {
         padding: 0 1vw 0;
         margin: 1.5vw 0;
         line-height: 1px;
-        border-left: 25vw solid ;
-        border-right: 25vw solid ;
+        border-left: 25vw solid;
+        border-right: 25vw solid;
         text-align: center;
-        font-size:1vw;
+        font-size: 1vw;
     }
-    body .h{
+
+    body .h {
         color: white;
         font-size: 30px;
     }
 }
-.login{
+
+.login {
     /* display:flex;  */
-    position:relative;
+    position: relative;
     width: 30vw;
     /* flex-direction: column;   */
     align-items: center;
@@ -77,31 +83,35 @@ body
     margin: 15vh 50vw 5vh 60vw;
     /* background-color: red; */
 }
-.login .bod{
+
+.login .bod {
     /* outline: none; */
     display: flex;
-    font-size:1.1rem;
+    font-size: 1.1rem;
     width: 30vw;
     height: 5vh;
     padding: 1rem 0 1rem 1vw;
     border: solid;
-    border-width:1px;
+    border-width: 1px;
     border-radius: 25px;
     border-color: gray;
     box-sizing: border-box;
     /* border-bottom:1px solid #284962; */
 }
-.h{
+
+.h {
     /* background-color: blue; */
     font-size: 40px;
     color: #284962;
-} 
-label{
+}
+
+label {
     color: grey;
     font-size: 1vw;
     margin: 0 0 0 1vw;
 }
-#log{
+
+#log {
     /* 登录按钮 */
     width: 30vw;
     height: 5vh;
@@ -111,24 +121,27 @@ label{
     background-color: #284962;
     font-size: 1.3rem;
 }
-span{
+
+span {
     color: white;
     font-size: 17px;
 }
-.line{
+
+.line {
     padding: 0 1vw 0;
     margin: 1.5vw 0;
     line-height: 1px;
-    border-left: 8vw solid ;
-    border-right: 8vw solid ;
+    border-left: 8vw solid;
+    border-right: 8vw solid;
     text-align: center;
-    font-size:1vw;
+    font-size: 1vw;
 }
-.im{
-    width:40px;
-    height:40px;
+
+.im {
+    width: 40px;
+    height: 40px;
     margin: 0.5vh 0 0 0;
-    padding:0.6vw;
+    padding: 0.6vw;
     border: solid;
     border-radius: 16px;
     border-color: grey;

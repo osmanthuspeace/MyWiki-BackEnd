@@ -7,17 +7,17 @@ namespace MyWiki.Entity.EntryEntity;
 
 public class Entry
 {
-    [Key] 
-    public int EntryId { get; set; }
+    [Key] public int EntryId { get; set; }
+
     public string Title { get; set; }
     public string Content { get; set; }
     public string? ImgUrl { get; set; }
-    
+
     public int? CategoryId { get; set; }
 
     public Category? Category { get; set; }
-    [JsonIgnore]
-    public ICollection<Tag> Tags { get; set; } = [];
+
+    [JsonIgnore] public ICollection<Tag> Tags { get; set; } = [];
 
     public IEnumerable<string> GetTagNames()
     {

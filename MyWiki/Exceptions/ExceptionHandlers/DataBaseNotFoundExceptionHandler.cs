@@ -17,7 +17,7 @@ public sealed class DataBaseNotFoundExceptionHandler : IExceptionHandler
                 {
                     Status = StatusCodes.Status404NotFound,
                     Detail = exception.Message,
-                    Title = "Not Found",
+                    Title = "Not Found"
                 }, cancellationToken);
                 return ValueTask.FromResult(true);
             case InvalidOperationException { Message: "" }:
@@ -28,7 +28,7 @@ public sealed class DataBaseNotFoundExceptionHandler : IExceptionHandler
                         Status = StatusCodes.Status404NotFound,
                         Title = "Not Found",
                         Detail = exception.Message,
-                        Type = "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+                        Type = "https://tools.ietf.org/html/rfc9110#section-15.5.5"
                     },
                     cancellationToken
                 );

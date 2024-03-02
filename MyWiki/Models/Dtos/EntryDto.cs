@@ -8,4 +8,3 @@ public class EntryDto
     public string? CategoryName { get; set; }
     public List<string> TagNames { get; set; } = [];
 }
-

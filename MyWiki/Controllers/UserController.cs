@@ -17,13 +17,13 @@ public class UserController(IUserDataProvider userDataProvider) : ControllerBase
         try
         {
             return Ok(await userDataProvider.Register(loginDto));
-
         }
         catch (Exception ex)
         {
             return BadRequest(ex.Message);
         }
     }
+
     //POST: 设置管理员
     [HttpPost]
     [Authorize]
@@ -40,7 +40,7 @@ public class UserController(IUserDataProvider userDataProvider) : ControllerBase
             return NotFound(ex.Message);
         }
     }
-    
+
     //POST: 登录
     [HttpPost]
     public async Task<ActionResult<string>> Login(LoginDto loginDto)
@@ -54,7 +54,7 @@ public class UserController(IUserDataProvider userDataProvider) : ControllerBase
             return BadRequest(ex.Message);
         }
     }
-    
+
     //GET: 用过Role查找用户
     [HttpGet]
     public async Task<ActionResult<IEnumerable<string>>> GetUsersByRole(string roleName)
@@ -93,7 +93,7 @@ public class UserController(IUserDataProvider userDataProvider) : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);//重复，则不能用这个用户名
+            return BadRequest(ex.Message); //重复，则不能用这个用户名
         }
     }
 
@@ -110,7 +110,7 @@ public class UserController(IUserDataProvider userDataProvider) : ControllerBase
             return NotFound(e.Message);
         }
     }
-    
+
     [HttpPost]
     [Authorize]
     public IActionResult CheckToken()
@@ -119,16 +119,17 @@ public class UserController(IUserDataProvider userDataProvider) : ControllerBase
         if (staff == "Admin") return Ok();
         return Ok(staff);
     }
-    
+
     //测试身份验证
-    [HttpPost]//用get会返回405
+    [HttpPost] //用get会返回405
     [Authorize]
     public ActionResult TestJwtVerification()
     {
         var userRole = User.FindFirstValue(ClaimTypes.Role); //这样可以获取到声明中的值
         return userRole switch
         {
-            "Admin" => Ok("You are the Admin, and you have permission to delete entries and enable other to be the admin"),
+            "Admin" => Ok(
+                "You are the Admin, and you have permission to delete entries and enable other to be the admin"),
             "User" => Ok("You are common users, and you have permission to add and edit entries"),
             "Visitor" => Ok("You are visitors, and you have permission to view entries"),
             _ => Ok("401")

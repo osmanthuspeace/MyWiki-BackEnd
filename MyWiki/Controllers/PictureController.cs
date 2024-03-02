@@ -5,7 +5,7 @@ namespace MyWiki.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class PictureController(IPictureProvider pictureProvider):ControllerBase
+public class PictureController(IPictureProvider pictureProvider) : ControllerBase
 {
     //POST:上传图片
     [HttpPost]

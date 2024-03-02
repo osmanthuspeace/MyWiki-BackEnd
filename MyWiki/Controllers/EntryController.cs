@@ -24,59 +24,65 @@ public class EntryController(IEntryDataProvider entryDataProviderService) : Cont
             return NotFound(ex.Message);
         }
     }
+
     //GET: 通过Title获取词条
     [HttpGet("{title}")]
-    public async Task<ActionResult<List<Entry>>> GetEntriesByTitle(string title,int page=1,int pageSize=10)
+    public async Task<ActionResult<List<Entry>>> GetEntriesByTitle(string title, int page = 1, int pageSize = 10)
     {
         try
         {
-            return Ok(await entryDataProviderService.GetEntriesByTitle(title,page,pageSize));
+            return Ok(await entryDataProviderService.GetEntriesByTitle(title, page, pageSize));
         }
         catch (Exception ex)
         {
             return NotFound(ex.Message);
         }
     }
+
     //GET: 通过Tags获取词条
     [HttpGet]
-    public async Task<ActionResult<ICollection<Entry>>> GetEntriesByTags([FromQuery]List<string>? tagNames,int page=1,int pageSize=10)
+    public async Task<ActionResult<ICollection<Entry>>> GetEntriesByTags([FromQuery] List<string>? tagNames,
+        int page = 1, int pageSize = 10)
     {
         try
         {
-            return Ok(await entryDataProviderService.GetEntriesByTags(tagNames,page,pageSize));
+            return Ok(await entryDataProviderService.GetEntriesByTags(tagNames, page, pageSize));
         }
         catch (Exception ex)
         {
             return NotFound(ex.Message);
         }
     }
+
     //GET: 通过Category获取词条
     [HttpGet]
-    public async Task<ActionResult<ICollection<Entry>>> GetEntriesByCategory(string categoryName,int page=1,int pageSize=10)
+    public async Task<ActionResult<ICollection<Entry>>> GetEntriesByCategory(string categoryName, int page = 1,
+        int pageSize = 10)
     {
         try
         {
-            return Ok(await entryDataProviderService.GetEntriesByCategory(categoryName,page,pageSize));
+            return Ok(await entryDataProviderService.GetEntriesByCategory(categoryName, page, pageSize));
         }
         catch (Exception ex)
         {
             return NotFound(ex.Message);
         }
     }
+
     //GET: 展示所有词条
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Entry>>> GetEntries(int page=1,int pageSize=10)
+    public async Task<ActionResult<IEnumerable<Entry>>> GetEntries(int page = 1, int pageSize = 10)
     {
         try
         {
-            return Ok(await entryDataProviderService.GetEntries(page,pageSize));
+            return Ok(await entryDataProviderService.GetEntries(page, pageSize));
         }
         catch (Exception ex)
         {
             return NotFound();
         }
     }
-    
+
     //POST: 新建词条
     [HttpPost]
     public async Task<ActionResult<Entry>> PostEntry(EntryDto entryDto)
@@ -90,7 +96,7 @@ public class EntryController(IEntryDataProvider entryDataProviderService) : Cont
             return BadRequest(ex.Message);
         }
     }
-    
+
     //PUT: 编辑词条
     [HttpPut]
     public async Task<IActionResult> UpdateEntry(EntryDto entryDto)
@@ -104,7 +110,7 @@ public class EntryController(IEntryDataProvider entryDataProviderService) : Cont
             return NotFound(ex.Message);
         }
     }
-    
+
     //DELETE: 删除词条
     [HttpDelete]
     [Authorize]
@@ -129,12 +135,11 @@ public class EntryController(IEntryDataProvider entryDataProviderService) : Cont
         {
             return Ok(entryDataProviderService.GetEntryTotal());
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return NotFound(e.Message);
         }
     }
-
 
 
     [HttpGet]
