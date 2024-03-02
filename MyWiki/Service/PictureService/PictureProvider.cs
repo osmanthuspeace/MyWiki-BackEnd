@@ -1,34 +1,25 @@
-using Microsoft.EntityFrameworkCore;
-using MyWiki.Data;
+using MyWiki.Data.Repositories;
 using MyWiki.Entity;
 using MyWiki.Service.Interface;
 
+// 引入仓储层的命名空间
+
 namespace MyWiki.Service.PictureService;
 
-//现在picture provider还依赖于wiki context，理论上不应该这样，而是应该依赖仓储层
-
-public class PictureProvider(WikiContext context, IWebHostEnvironment hostEnvironment) : IPictureProvider
+//重点在于IPictureRepository pictureRepository这一段,这个变量可以引用任何实现了 IPictureRepository 接口的对象，提高了代码的抽象层次。
+public class PictureProvider(IPictureRepository pictureRepository, IWebHostEnvironment hostEnvironment)
+    : IPictureProvider
 {
-    //POST:上传图片
     public async Task<Picture> UploadPicture(IFormFile pic)
     {
-        if (pic.Length == 0) throw new Exception("please upload a picture");
         var rootPath = hostEnvironment.WebRootPath;
-        var picName = $"{Guid.NewGuid().ToString()}{Path.GetExtension(pic.FileName)}";
-        var picPath = Path.Combine(rootPath, "uploads", picName);
-        await using var stream = new FileStream(picPath, FileMode.Create);
-        await pic.CopyToAsync(stream);
-        var picture = new Picture { PictureUrl = picPath };
-        context.Pictures.Add(picture);
-        await context.SaveChangesAsync();
-        return picture; //Save之后，Id会被数据库自动填充
+        var uploadPath = Path.Combine(rootPath, "uploads");
+
+        return await pictureRepository.UploadPictureAsync(pic, uploadPath);
     }
 
-    //GET:根据Id获取图片
     public async Task<string> GetPictureById(int id)
     {
-        var existPicture = await context.Pictures.FirstOrDefaultAsync(p => p.PictureId == id);
-        if (existPicture == null) throw new Exception("There is no picture for this id");
-        return existPicture.PictureUrl;
+        return await pictureRepository.GetPictureUrlByIdAsync(id);
     }
 }
