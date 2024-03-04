@@ -3,13 +3,18 @@ using MyWiki.Entity;
 
 namespace MyWiki.Data.Repositories;
 
-public class PictureRepository(WikiContext context) : IPictureRepository
+public class PictureRepository(WikiContext context, ILogger<PictureRepository> logger) : IPictureRepository
 {
     public async Task<Picture> UploadPictureAsync(IFormFile pic, string uploadPath)
     {
-        if (pic.Length == 0) throw new InvalidOperationException("Please upload a picture.");
+        if (pic.Length == 0)
+        {
+            logger.LogWarning("picture is empty");
+            throw new InvalidOperationException("Please upload a picture.");
+        }
 
         var picName = $"{Guid.NewGuid()}{Path.GetExtension(pic.FileName)}";
+
         var picPath = Path.Combine(uploadPath, picName);
 
         await using (var stream = new FileStream(picPath, FileMode.Create))
@@ -17,7 +22,8 @@ public class PictureRepository(WikiContext context) : IPictureRepository
             await pic.CopyToAsync(stream);
         }
 
-        var picture = new Picture { PictureUrl = picPath };
+        var pictureUrl = new Uri(picPath, UriKind.Absolute);
+        var picture = new Picture { PictureUrl = pictureUrl };
         context.Pictures.Add(picture);
         await context.SaveChangesAsync();
 
@@ -30,6 +36,6 @@ public class PictureRepository(WikiContext context) : IPictureRepository
 
         if (picture == null) throw new InvalidOperationException("There is no picture for this ID.");
 
-        return picture.PictureUrl;
+        return picture.PictureUrl.ToString();
     }
 }

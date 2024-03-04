@@ -21,6 +21,9 @@
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0"/>
+        <PackageReference Include="NLog" Version="5.2.8"/>
+        <PackageReference Include="NLog.Extensions.Logging" Version="5.3.8"/>
+        <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.8"/>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
@@ -35,6 +38,9 @@
 
     <ItemGroup>
         <Content Remove="Service\PasswordHasher\**"/>
+        <Content Update="nlog.config">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
@@ -43,6 +49,19 @@
 
     <ItemGroup>
         <Folder Include="Application\"/>
+        <Folder Include="wwwroot\uploads\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="wwwroot\css\loginstyle.css"/>
+        <_ContentIncludedByDefault Remove="wwwroot\img\login_pc.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\img\login_phone.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\img\QQ.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\img\WeChat.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\Index.html"/>
+        <_ContentIncludedByDefault Remove="wwwroot\js\site.js"/>
+        <_ContentIncludedByDefault Remove="wwwroot\page\login.html"/>
+        <_ContentIncludedByDefault Remove="wwwroot\uploads\.gitkeep"/>
     </ItemGroup>
 
 </Project>

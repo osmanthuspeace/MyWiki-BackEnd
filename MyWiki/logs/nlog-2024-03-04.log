@@ -1,0 +1,180 @@
+2024-03-04 17:18:33.4074|INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|User profile is available. Using '/Users/ouyangguiping/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest. 
+2024-03-04 17:18:33.4893|INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5054 
+2024-03-04 17:18:33.4923|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2024-03-04 17:18:33.4923|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2024-03-04 17:18:33.4923|INFO|Microsoft.Hosting.Lifetime|Content root path: /Users/ouyangguiping/Desktop/vueee/MyWiki/BackEnd/MyWiki/MyWiki 
+2024-03-04 17:18:33.6317|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/swagger/index.html - - - 
+2024-03-04 17:18:33.7141|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/swagger/index.html - 200 - text/html;charset=utf-8 81.6677ms 
+2024-03-04 17:18:34.2192|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/swagger/v1/swagger.json - - - 
+2024-03-04 17:18:34.3201|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 100.9674ms 
+2024-03-04 17:18:41.6697|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/12 - - - 
+2024-03-04 17:18:41.7201|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executing endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 17:18:41.7365|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Route matched with {action = "GetEntryById", controller = "Entry"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[MyWiki.Entity.EntryEntity.Entry]] GetEntryById(Int32) on controller MyWiki.Controllers.EntryController (MyWiki). 
+2024-03-04 17:18:41.8855|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executing action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki) - Validation state: Valid 
+2024-03-04 17:18:41.8866|INFO|MyWiki.Controllers.EntryController|这是一条信息级别的日志 
+2024-03-04 17:18:41.8866|ERROR|MyWiki.Controllers.EntryController|这是一条错误级别的日志 
+2024-03-04 17:18:44.3933|INFO|Microsoft.EntityFrameworkCore.Database.Command|Executed DbCommand (88ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT t."EntryId", t."CategoryId", t."Content", t."ImgUrl", t."Title", t0."EntryId", t0."TagsId", t0."TagId", t0."TagName"
+FROM (
+    SELECT e."EntryId", e."CategoryId", e."Content", e."ImgUrl", e."Title"
+    FROM "Entries" AS e
+    WHERE e."EntryId" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT e0."EntryId", e0."TagsId", t1."TagId", t1."TagName"
+    FROM "EntryTag" AS e0
+    INNER JOIN "Tags" AS t1 ON e0."TagsId" = t1."TagId"
+) AS t0 ON t."EntryId" = t0."EntryId"
+ORDER BY t."EntryId", t0."EntryId", t0."TagsId" 
+2024-03-04 17:18:44.5649|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 2673.1288ms. 
+2024-03-04 17:18:44.5733|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor|Executing OkObjectResult, writing value of type 'MyWiki.Models.Dtos.EntryDto'. 
+2024-03-04 17:18:44.5862|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action MyWiki.Controllers.EntryController.GetEntryById (MyWiki) in 2844.0965ms 
+2024-03-04 17:18:44.5873|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executed endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 17:18:44.6063|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/12 - 200 - application/json;+charset=utf-8 2937.0942ms 
+2024-03-04 17:28:19.9458|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/122 - - - 
+2024-03-04 17:28:19.9723|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executing endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 17:28:19.9769|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Route matched with {action = "GetEntryById", controller = "Entry"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[MyWiki.Entity.EntryEntity.Entry]] GetEntryById(Int32) on controller MyWiki.Controllers.EntryController (MyWiki). 
+2024-03-04 17:28:19.9849|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executing action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki) - Validation state: Valid 
+2024-03-04 17:28:19.9849|INFO|MyWiki.Controllers.EntryController|这是一条信息级别的日志 
+2024-03-04 17:28:19.9849|ERROR|MyWiki.Controllers.EntryController|这是一条错误级别的日志 
+2024-03-04 17:28:20.0670|INFO|Microsoft.EntityFrameworkCore.Database.Command|Executed DbCommand (38ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT t."EntryId", t."CategoryId", t."Content", t."ImgUrl", t."Title", t0."EntryId", t0."TagsId", t0."TagId", t0."TagName"
+FROM (
+    SELECT e."EntryId", e."CategoryId", e."Content", e."ImgUrl", e."Title"
+    FROM "Entries" AS e
+    WHERE e."EntryId" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT e0."EntryId", e0."TagsId", t1."TagId", t1."TagName"
+    FROM "EntryTag" AS e0
+    INNER JOIN "Tags" AS t1 ON e0."TagsId" = t1."TagId"
+) AS t0 ON t."EntryId" = t0."EntryId"
+ORDER BY t."EntryId", t0."EntryId", t0."TagsId" 
+2024-03-04 17:28:20.0695|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki), returned result Microsoft.AspNetCore.Mvc.NotFoundObjectResult in 84.4695ms. 
+2024-03-04 17:28:20.0702|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor|Executing NotFoundObjectResult, writing value of type 'System.String'. 
+2024-03-04 17:28:20.0721|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action MyWiki.Controllers.EntryController.GetEntryById (MyWiki) in 95.0554ms 
+2024-03-04 17:28:20.0721|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executed endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 17:28:20.0721|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/122 - 404 - text/plain;+charset=utf-8 130.1895ms 
+2024-03-04 17:28:25.9624|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/1222 - - - 
+2024-03-04 17:28:25.9724|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executing endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 17:28:25.9731|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Route matched with {action = "GetEntryById", controller = "Entry"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[MyWiki.Entity.EntryEntity.Entry]] GetEntryById(Int32) on controller MyWiki.Controllers.EntryController (MyWiki). 
+2024-03-04 17:28:25.9870|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executing action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki) - Validation state: Valid 
+2024-03-04 17:28:25.9882|INFO|MyWiki.Controllers.EntryController|这是一条信息级别的日志 
+2024-03-04 17:28:25.9882|ERROR|MyWiki.Controllers.EntryController|这是一条错误级别的日志 
+2024-03-04 17:28:26.0441|INFO|Microsoft.EntityFrameworkCore.Database.Command|Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT t."EntryId", t."CategoryId", t."Content", t."ImgUrl", t."Title", t0."EntryId", t0."TagsId", t0."TagId", t0."TagName"
+FROM (
+    SELECT e."EntryId", e."CategoryId", e."Content", e."ImgUrl", e."Title"
+    FROM "Entries" AS e
+    WHERE e."EntryId" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT e0."EntryId", e0."TagsId", t1."TagId", t1."TagName"
+    FROM "EntryTag" AS e0
+    INNER JOIN "Tags" AS t1 ON e0."TagsId" = t1."TagId"
+) AS t0 ON t."EntryId" = t0."EntryId"
+ORDER BY t."EntryId", t0."EntryId", t0."TagsId" 
+2024-03-04 17:28:26.0441|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki), returned result Microsoft.AspNetCore.Mvc.NotFoundObjectResult in 56.991ms. 
+2024-03-04 17:28:26.0450|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor|Executing NotFoundObjectResult, writing value of type 'System.String'. 
+2024-03-04 17:28:26.0450|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action MyWiki.Controllers.EntryController.GetEntryById (MyWiki) in 72.0894ms 
+2024-03-04 17:28:26.0450|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executed endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 17:28:26.0450|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/1222 - 404 - text/plain;+charset=utf-8 83.7356ms 
+2024-03-04 17:29:22.6998|INFO|Microsoft.Hosting.Lifetime|Application is shutting down... 
+2024-03-04 17:29:28.5303|INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|User profile is available. Using '/Users/ouyangguiping/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest. 
+2024-03-04 17:29:28.6250|INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5054 
+2024-03-04 17:29:28.6301|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2024-03-04 17:29:28.6301|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2024-03-04 17:29:28.6301|INFO|Microsoft.Hosting.Lifetime|Content root path: /Users/ouyangguiping/Desktop/vueee/MyWiki/BackEnd/MyWiki/MyWiki 
+2024-03-04 17:29:29.3566|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/swagger/index.html - - - 
+2024-03-04 17:29:29.6428|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/swagger/index.html - 200 - text/html;charset=utf-8 288.6120ms 
+2024-03-04 17:29:30.8307|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/swagger/v1/swagger.json - - - 
+2024-03-04 17:29:31.2735|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 443.0615ms 
+2024-03-04 17:29:44.0572|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/123 - - - 
+2024-03-04 17:29:44.1180|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executing endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 17:29:44.1359|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Route matched with {action = "GetEntryById", controller = "Entry"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[MyWiki.Entity.EntryEntity.Entry]] GetEntryById(Int32) on controller MyWiki.Controllers.EntryController (MyWiki). 
+2024-03-04 17:29:44.3143|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executing action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki) - Validation state: Valid 
+2024-03-04 17:29:44.3162|INFO|MyWiki.Controllers.EntryController|这是一条信息级别的日志 
+2024-03-04 17:29:44.3162|ERROR|MyWiki.Controllers.EntryController|这是一条错误级别的日志 
+2024-03-04 17:29:46.3089|INFO|Microsoft.EntityFrameworkCore.Database.Command|Executed DbCommand (102ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT t."EntryId", t."CategoryId", t."Content", t."ImgUrl", t."Title", t0."EntryId", t0."TagsId", t0."TagId", t0."TagName"
+FROM (
+    SELECT e."EntryId", e."CategoryId", e."Content", e."ImgUrl", e."Title"
+    FROM "Entries" AS e
+    WHERE e."EntryId" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT e0."EntryId", e0."TagsId", t1."TagId", t1."TagName"
+    FROM "EntryTag" AS e0
+    INNER JOIN "Tags" AS t1 ON e0."TagsId" = t1."TagId"
+) AS t0 ON t."EntryId" = t0."EntryId"
+ORDER BY t."EntryId", t0."EntryId", t0."TagsId" 
+2024-03-04 17:29:46.3478|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki), returned result Microsoft.AspNetCore.Mvc.NotFoundObjectResult in 2026.8347ms. 
+2024-03-04 17:29:46.3580|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor|Executing NotFoundObjectResult, writing value of type 'System.String'. 
+2024-03-04 17:29:46.3662|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action MyWiki.Controllers.EntryController.GetEntryById (MyWiki) in 2224.0917ms 
+2024-03-04 17:29:46.3673|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executed endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 17:29:46.3925|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/123 - 404 - text/plain;+charset=utf-8 2335.4787ms 
+2024-03-04 17:29:52.7243|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/123123 - - - 
+2024-03-04 17:29:52.7487|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executing endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 17:29:52.7494|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Route matched with {action = "GetEntryById", controller = "Entry"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[MyWiki.Entity.EntryEntity.Entry]] GetEntryById(Int32) on controller MyWiki.Controllers.EntryController (MyWiki). 
+2024-03-04 17:29:52.7520|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executing action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki) - Validation state: Valid 
+2024-03-04 17:29:52.7520|INFO|MyWiki.Controllers.EntryController|这是一条信息级别的日志 
+2024-03-04 17:29:52.7520|ERROR|MyWiki.Controllers.EntryController|这是一条错误级别的日志 
+2024-03-04 17:29:52.7816|INFO|Microsoft.EntityFrameworkCore.Database.Command|Executed DbCommand (7ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT t."EntryId", t."CategoryId", t."Content", t."ImgUrl", t."Title", t0."EntryId", t0."TagsId", t0."TagId", t0."TagName"
+FROM (
+    SELECT e."EntryId", e."CategoryId", e."Content", e."ImgUrl", e."Title"
+    FROM "Entries" AS e
+    WHERE e."EntryId" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT e0."EntryId", e0."TagsId", t1."TagId", t1."TagName"
+    FROM "EntryTag" AS e0
+    INNER JOIN "Tags" AS t1 ON e0."TagsId" = t1."TagId"
+) AS t0 ON t."EntryId" = t0."EntryId"
+ORDER BY t."EntryId", t0."EntryId", t0."TagsId" 
+2024-03-04 17:29:52.7825|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki), returned result Microsoft.AspNetCore.Mvc.NotFoundObjectResult in 30.3601ms. 
+2024-03-04 17:29:52.7830|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor|Executing NotFoundObjectResult, writing value of type 'System.String'. 
+2024-03-04 17:29:52.7830|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action MyWiki.Controllers.EntryController.GetEntryById (MyWiki) in 33.7143ms 
+2024-03-04 17:29:52.7830|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executed endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 17:29:52.7830|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/123123 - 404 - text/plain;+charset=utf-8 60.2136ms 
+2024-03-04 17:37:15.1031|INFO|Microsoft.Hosting.Lifetime|Application is shutting down... 
+2024-03-04 21:40:49.6179|INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|User profile is available. Using '/Users/ouyangguiping/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest. 
+2024-03-04 21:40:49.6811|INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5054 
+2024-03-04 21:40:49.6837|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. 
+2024-03-04 21:40:49.6837|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development 
+2024-03-04 21:40:49.6837|INFO|Microsoft.Hosting.Lifetime|Content root path: /Users/ouyangguiping/Desktop/vueee/MyWiki/BackEnd/MyWiki/MyWiki 
+2024-03-04 21:40:50.1773|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/swagger/index.html - - - 
+2024-03-04 21:40:50.2637|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/swagger/index.html - 200 - text/html;charset=utf-8 85.2285ms 
+2024-03-04 21:40:50.9513|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/swagger/v1/swagger.json - - - 
+2024-03-04 21:40:51.0591|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/swagger/v1/swagger.json - 200 - application/json;charset=utf-8 107.5828ms 
+2024-03-04 21:40:54.4307|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/12 - - - 
+2024-03-04 21:40:54.4776|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executing endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 21:40:54.4933|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Route matched with {action = "GetEntryById", controller = "Entry"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[MyWiki.Entity.EntryEntity.Entry]] GetEntryById(Int32) on controller MyWiki.Controllers.EntryController (MyWiki). 
+2024-03-04 21:40:54.6244|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executing action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki) - Validation state: Valid 
+2024-03-04 21:40:54.6254|INFO|MyWiki.Controllers.EntryController|这是一条信息级别的日志 
+2024-03-04 21:40:54.6254|ERROR|MyWiki.Controllers.EntryController|这是一条错误级别的日志 
+2024-03-04 21:40:56.4023|INFO|Microsoft.EntityFrameworkCore.Database.Command|Executed DbCommand (87ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT t."EntryId", t."CategoryId", t."Content", t."ImgUrl", t."Title", t0."EntryId", t0."TagsId", t0."TagId", t0."TagName"
+FROM (
+    SELECT e."EntryId", e."CategoryId", e."Content", e."ImgUrl", e."Title"
+    FROM "Entries" AS e
+    WHERE e."EntryId" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN (
+    SELECT e0."EntryId", e0."TagsId", t1."TagId", t1."TagName"
+    FROM "EntryTag" AS e0
+    INNER JOIN "Tags" AS t1 ON e0."TagsId" = t1."TagId"
+) AS t0 ON t."EntryId" = t0."EntryId"
+ORDER BY t."EntryId", t0."EntryId", t0."TagsId" 
+2024-03-04 21:40:56.5247|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1895.1585ms. 
+2024-03-04 21:40:56.5316|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor|Executing OkObjectResult, writing value of type 'MyWiki.Models.Dtos.EntryDto'. 
+2024-03-04 21:40:56.5420|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action MyWiki.Controllers.EntryController.GetEntryById (MyWiki) in 2044.1619ms 
+2024-03-04 21:40:56.5428|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executed endpoint 'MyWiki.Controllers.EntryController.GetEntryById (MyWiki)' 
+2024-03-04 21:40:56.5579|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET http://localhost:5054/api/Entry/GetEntryById/12 - 200 - application/json;+charset=utf-8 2127.1089ms 
+2024-03-04 22:15:21.3110|INFO|Microsoft.Hosting.Lifetime|Application is shutting down... 

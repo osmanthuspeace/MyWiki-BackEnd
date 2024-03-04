@@ -17,7 +17,7 @@ public class EntryDataProvider(WikiContext context) : IEntryDataProvider
             // .Include(e=>e.Category)
             .Include(e => e.Tags)
             .FirstOrDefaultAsync(e => e.EntryId == id);
-        if (entry == null) throw new Exception("There is no entry for this id");
+        if (entry == null) throw new InvalidDataException("There is no entry for this id");
         return new EntryDto
         {
             Id = entry.EntryId,
@@ -32,7 +32,7 @@ public class EntryDataProvider(WikiContext context) : IEntryDataProvider
     public async Task<List<EntryDto>> GetEntriesByTitle(string title, int page, int pageSize)
     {
         var skipCount = (page - 1) * pageSize;
-        if (title.IsNullOrEmpty()) throw new Exception("please specify the title");
+        if (title.IsNullOrEmpty()) throw new InvalidOperationException("please specify the title");
         var entries = await context.Entries
             .Where(entry => entry.Title.Contains(title))
             .OrderBy(e => e)
@@ -41,7 +41,7 @@ public class EntryDataProvider(WikiContext context) : IEntryDataProvider
             .Skip(skipCount)
             .Take(pageSize)
             .ToListAsync();
-        if (entries.Count == 0) throw new Exception("There is no entry with this title");
+        if (entries.Count == 0) throw new Exception();
         return entries.Select(e => new EntryDto
         {
             Id = e.EntryId,
@@ -213,8 +213,8 @@ public class EntryDataProvider(WikiContext context) : IEntryDataProvider
     {
         var entry = await context.Entries.FirstOrDefaultAsync(e => e.Title == title);
         if (entry == null) throw new Exception("There is no entry with this title");
-        if (entry.ImgUrl != null && File.Exists(entry.ImgUrl))
-            File.Delete(entry.ImgUrl);
+        if (entry.ImgUrl != null && File.Exists(entry.ImgUrl.LocalPath))
+            File.Delete(entry.ImgUrl.LocalPath);
         context.Entries.Remove(entry);
         await context.SaveChangesAsync();
         return "Delete success";

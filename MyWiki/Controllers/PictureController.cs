@@ -5,7 +5,7 @@ namespace MyWiki.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class PictureController(IPictureProvider pictureProvider) : ControllerBase
+public class PictureController(IPictureProvider pictureProvider, ILogger<PictureController> logger) : ControllerBase
 {
     //POST:上传图片
     [HttpPost]
@@ -17,7 +17,10 @@ public class PictureController(IPictureProvider pictureProvider) : ControllerBas
         }
         catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            logger.LogError(ex, "error");
+            // 返回一个通用的服务器错误响应
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new { message = "An unexpected error occurred." });
         }
     }
 

@@ -11,7 +11,7 @@ public class Entry
 
     public string Title { get; set; }
     public string Content { get; set; }
-    public string? ImgUrl { get; set; }
+    public Uri? ImgUrl { get; set; }
 
     public int? CategoryId { get; set; }
 

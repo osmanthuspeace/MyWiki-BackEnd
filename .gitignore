@@ -21,3 +21,6 @@
 bin/
 obj/
 Migration/
+log/
+wwwroot/uploads/
+
