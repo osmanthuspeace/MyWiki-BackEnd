@@ -35,3 +35,76 @@
    at NLog.Config.LoggingConfigurationFileLoader.LoadXmlLoggingConfiguration(XmlReader xmlReader, String configFile, LogFactory logFactory)
    at NLog.Config.LoggingConfigurationFileLoader.LoadXmlLoggingConfigurationFile(LogFactory logFactory, String configFile)
    at NLog.Config.LoggingConfigurationFileLoader.TryLoadLoggingConfiguration(LogFactory logFactory, String configFile, LoggingConfiguration& config)
+2024-03-05 08:53:19.0998 Error Error has been raised. Exception: NLog.NLogConfigurationException: Error loading extensions: NLog.Web.AspNetCore
+ ---> System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.
+
+File name: 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'
+   at System.Reflection.RuntimeAssembly.InternalLoad(AssemblyName assemblyName, StackCrawlMark& stackMark, AssemblyLoadContext assemblyLoadContext, RuntimeAssembly requestingAssembly, Boolean throwOnFileNotFound)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Config.AssemblyExtensionLoader.LoadAssemblyFromName(String assemblyName)
+   at NLog.Config.AssemblyExtensionLoader.LoadAssemblyFromName(ConfigurationItemFactory factory, String assemblyName, String itemNamePrefix)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssemblyName(String assemblyName, String prefix)
+   --- End of inner exception stack trace ---
+2024-03-05 08:53:19.1169 Error Exception when loading configuration /Users/ouyangguiping/Desktop/vueee/MyWiki/BackEnd/MyWiki/MyWiki/bin/Debug/net8.0/NLog.config Exception: NLog.NLogConfigurationException: Error loading extensions: NLog.Web.AspNetCore
+ ---> System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.
+
+File name: 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'
+   at System.Reflection.RuntimeAssembly.InternalLoad(AssemblyName assemblyName, StackCrawlMark& stackMark, AssemblyLoadContext assemblyLoadContext, RuntimeAssembly requestingAssembly, Boolean throwOnFileNotFound)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Config.AssemblyExtensionLoader.LoadAssemblyFromName(String assemblyName)
+   at NLog.Config.AssemblyExtensionLoader.LoadAssemblyFromName(ConfigurationItemFactory factory, String assemblyName, String itemNamePrefix)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssemblyName(String assemblyName, String prefix)
+   --- End of inner exception stack trace ---
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssemblyName(String assemblyName, String prefix)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionsElement(ValidatedConfigurationElement extensionsElement, String baseDirectory)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.ParseTopLevel(XmlLoggingConfigurationElement content, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+2024-03-05 08:53:19.1169 Error Error has been raised. Exception: NLog.NLogConfigurationException: Exception when loading configuration /Users/ouyangguiping/Desktop/vueee/MyWiki/BackEnd/MyWiki/MyWiki/bin/Debug/net8.0/NLog.config
+ ---> NLog.NLogConfigurationException: Error loading extensions: NLog.Web.AspNetCore
+ ---> System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.
+
+File name: 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'
+   at System.Reflection.RuntimeAssembly.InternalLoad(AssemblyName assemblyName, StackCrawlMark& stackMark, AssemblyLoadContext assemblyLoadContext, RuntimeAssembly requestingAssembly, Boolean throwOnFileNotFound)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Config.AssemblyExtensionLoader.LoadAssemblyFromName(String assemblyName)
+   at NLog.Config.AssemblyExtensionLoader.LoadAssemblyFromName(ConfigurationItemFactory factory, String assemblyName, String itemNamePrefix)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssemblyName(String assemblyName, String prefix)
+   --- End of inner exception stack trace ---
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssemblyName(String assemblyName, String prefix)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionsElement(ValidatedConfigurationElement extensionsElement, String baseDirectory)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.ParseTopLevel(XmlLoggingConfigurationElement content, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   at NLog.Config.XmlLoggingConfiguration..ctor(XmlReader reader, String fileName, LogFactory logFactory)
+   at NLog.Config.LoggingConfigurationFileLoader.LoadXmlLoggingConfiguration(XmlReader xmlReader, String configFile, LogFactory logFactory)
+2024-03-05 08:53:19.1180 Error Failed loading from config file location: /Users/ouyangguiping/Desktop/vueee/MyWiki/BackEnd/MyWiki/MyWiki/bin/Debug/net8.0/NLog.config Exception: NLog.NLogConfigurationException: Exception when loading configuration /Users/ouyangguiping/Desktop/vueee/MyWiki/BackEnd/MyWiki/MyWiki/bin/Debug/net8.0/NLog.config
+ ---> NLog.NLogConfigurationException: Error loading extensions: NLog.Web.AspNetCore
+ ---> System.IO.FileNotFoundException: Could not load file or assembly 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.
+
+File name: 'NLog.Web.AspNetCore, Culture=neutral, PublicKeyToken=null'
+   at System.Reflection.RuntimeAssembly.InternalLoad(AssemblyName assemblyName, StackCrawlMark& stackMark, AssemblyLoadContext assemblyLoadContext, RuntimeAssembly requestingAssembly, Boolean throwOnFileNotFound)
+   at System.Reflection.Assembly.Load(String assemblyString)
+   at NLog.Config.AssemblyExtensionLoader.LoadAssemblyFromName(String assemblyName)
+   at NLog.Config.AssemblyExtensionLoader.LoadAssemblyFromName(ConfigurationItemFactory factory, String assemblyName, String itemNamePrefix)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssemblyName(String assemblyName, String prefix)
+   --- End of inner exception stack trace ---
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionWithAssemblyName(String assemblyName, String prefix)
+   at NLog.Config.LoggingConfigurationParser.ParseExtensionsElement(ValidatedConfigurationElement extensionsElement, String baseDirectory)
+   at NLog.Config.LoggingConfigurationParser.LoadConfig(ILoggingConfigurationElement nlogConfig, String basePath)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(ILoggingConfigurationElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.ParseTopLevel(XmlLoggingConfigurationElement content, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   at NLog.Config.XmlLoggingConfiguration..ctor(XmlReader reader, String fileName, LogFactory logFactory)
+   at NLog.Config.LoggingConfigurationFileLoader.LoadXmlLoggingConfiguration(XmlReader xmlReader, String configFile, LogFactory logFactory)
+   at NLog.Config.LoggingConfigurationFileLoader.LoadXmlLoggingConfigurationFile(LogFactory logFactory, String configFile)
+   at NLog.Config.LoggingConfigurationFileLoader.TryLoadLoggingConfiguration(LogFactory logFactory, String configFile, LoggingConfiguration& config)
+2024-03-05 18:51:21.9577 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: mail
+2024-03-05 18:54:53.9245 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: mail
+2024-03-05 19:00:43.6662 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: mail

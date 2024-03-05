@@ -11,6 +11,7 @@ using MyWiki.Service.PictureService;
 using MyWiki.Service.UserService;
 using Newtonsoft.Json;
 using NLog.Extensions.Logging;
+using Serilog;
 
 namespace MyWiki.Extensions;
 
@@ -22,13 +23,14 @@ public static class WebApplicationBuilderExtension
         builder.Services.AddDbContext<WikiContext>(o =>
             o.UseNpgsql(connectString));
 
+        builder.Logging.AddSerilog();
         builder.Services.AddLogging(l =>
         {
             // l.AddConsole();
             l.AddNLog();
-            l.SetMinimumLevel(LogLevel.Trace);
+            // l.SetMinimumLevel(LogLevel.Warning);
         });
-        
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
@@ -41,7 +43,7 @@ public static class WebApplicationBuilderExtension
                     .AllowAnyHeader()
                     .AllowCredentials());
         }); //配置同源策略
-        
+
         builder.Services.AddScoped<IEntryDataProvider, EntryDataProvider>();
         builder.Services.AddScoped<IUserDataProvider, UserDataProvider>();
         builder.Services.AddScoped<IPictureProvider, PictureProvider>();

@@ -170,7 +170,6 @@ LEFT JOIN (
     SELECT e0."EntryId", e0."TagsId", t1."TagId", t1."TagName"
     FROM "EntryTag" AS e0
     INNER JOIN "Tags" AS t1 ON e0."TagsId" = t1."TagId"
-) AS t0 ON t."EntryId" = t0."EntryId"
 ORDER BY t."EntryId", t0."EntryId", t0."TagsId" 
 2024-03-04 21:40:56.5247|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action method MyWiki.Controllers.EntryController.GetEntryById (MyWiki), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1895.1585ms. 
 2024-03-04 21:40:56.5316|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor|Executing OkObjectResult, writing value of type 'MyWiki.Models.Dtos.EntryDto'. 

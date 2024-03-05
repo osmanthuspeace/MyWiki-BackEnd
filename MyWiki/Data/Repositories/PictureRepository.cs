@@ -3,15 +3,11 @@ using MyWiki.Entity;
 
 namespace MyWiki.Data.Repositories;
 
-public class PictureRepository(WikiContext context, ILogger<PictureRepository> logger) : IPictureRepository
+public class PictureRepository(WikiContext context) : IPictureRepository
 {
     public async Task<Picture> UploadPictureAsync(IFormFile pic, string uploadPath)
     {
-        if (pic.Length == 0)
-        {
-            logger.LogWarning("picture is empty");
-            throw new InvalidOperationException("Please upload a picture.");
-        }
+        if (pic.Length == 0) throw new InvalidOperationException("Please upload a picture.");
 
         var picName = $"{Guid.NewGuid()}{Path.GetExtension(pic.FileName)}";
 

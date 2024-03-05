@@ -2,6 +2,8 @@ using MyWiki.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ConfigureLogger();
+
 builder.ConfigureServices();
 
 var app = builder.Build();

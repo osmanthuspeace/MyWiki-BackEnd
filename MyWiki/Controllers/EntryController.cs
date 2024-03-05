@@ -9,14 +9,14 @@ namespace MyWiki.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class EntryController(IEntryDataProvider entryDataProviderService, ILogger<EntryController> logger) : ControllerBase
+public class EntryController(IEntryDataProvider entryDataProviderService, ILogger<EntryController> logger)
+    : ControllerBase
 {
     // GET: 通过Id获取词条
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Entry>> GetEntryById(int id)
     {
-        logger.LogInformation("这是一条信息级别的日志");
-        logger.LogError("这是一条错误级别的日志");
+        // logger.LogError("*************{@id}******************",id);
         try
         {
             return Ok(await entryDataProviderService.GetEntryById(id));
