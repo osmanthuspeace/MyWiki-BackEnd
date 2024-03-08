@@ -51,21 +51,25 @@ namespace MyWiki.Migrations
                         .HasColumnType("character varying(255)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("ParentCategoryId")
+                        .HasColumnType("integer");
+
                     b.HasKey("CategoryId");
+
+                    b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("MyWiki.Entity.EntryEntity.Entry", b =>
                 {
-                    b.Property<int?>("EntryId")
+                    b.Property<int>("EntryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("EntryId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EntryId"));
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("integer");
@@ -185,6 +189,16 @@ namespace MyWiki.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MyWiki.Entity.EntryEntity.Category", b =>
+                {
+                    b.HasOne("MyWiki.Entity.EntryEntity.Category", "ParentCategory")
+                        .WithMany("ChildrenCategories")
+                        .HasForeignKey("ParentCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("ParentCategory");
+                });
+
             modelBuilder.Entity("MyWiki.Entity.EntryEntity.Entry", b =>
                 {
                     b.HasOne("MyWiki.Entity.EntryEntity.Category", "Category")
@@ -205,6 +219,8 @@ namespace MyWiki.Migrations
 
             modelBuilder.Entity("MyWiki.Entity.EntryEntity.Category", b =>
                 {
+                    b.Navigation("ChildrenCategories");
+
                     b.Navigation("Entries");
                 });
 

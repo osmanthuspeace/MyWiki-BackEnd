@@ -10,11 +10,12 @@ public static class LogBuilderExtension
         builder.ClearProviders();
         var logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-            .Enrich
-            .FromLogContext()
+            .Enrich.FromLogContext()
             // .WriteTo.Console(new JsonFormatter())
-            .WriteTo.File(new CompactJsonFormatter(),
-                "/Users/ouyangguiping/Desktop/vueee/MyWiki/BackEnd/MyWiki/MyWiki/logs/serilogs")
+            .WriteTo.File(
+                new CompactJsonFormatter(),
+                "/Users/ouyangguiping/Desktop/vueee/MyWiki/BackEnd/MyWiki/MyWiki/logs/serilogs"
+            )
             .CreateLogger();
         builder.AddSerilog(logger);
     }

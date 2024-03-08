@@ -30,7 +30,8 @@ public class UserController(IUserDataProvider userDataProvider) : ControllerBase
     public async Task<ActionResult<string>> SetAdmin(string name)
     {
         var role = User.FindFirstValue(ClaimTypes.Role);
-        if (role is not "Admin") return Unauthorized("Only administrators have permission to set administer");
+        if (role is not "Admin")
+            return Unauthorized("Only administrators have permission to set administer");
         try
         {
             return Ok(await userDataProvider.SetAdmin(name));
@@ -116,7 +117,8 @@ public class UserController(IUserDataProvider userDataProvider) : ControllerBase
     public IActionResult CheckToken()
     {
         var staff = User.FindFirstValue(ClaimTypes.Role);
-        if (staff == "Admin") return Ok();
+        if (staff == "Admin")
+            return Ok();
         return Ok(staff);
     }
 
@@ -128,8 +130,10 @@ public class UserController(IUserDataProvider userDataProvider) : ControllerBase
         var userRole = User.FindFirstValue(ClaimTypes.Role); //这样可以获取到声明中的值
         return userRole switch
         {
-            "Admin" => Ok(
-                "You are the Admin, and you have permission to delete entries and enable other to be the admin"),
+            "Admin"
+                => Ok(
+                    "You are the Admin, and you have permission to delete entries and enable other to be the admin"
+                ),
             "User" => Ok("You are common users, and you have permission to add and edit entries"),
             "Visitor" => Ok("You are visitors, and you have permission to view entries"),
             _ => Ok("401")

@@ -20,6 +20,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.2"/>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0"/>
         <PackageReference Include="NLog.Extensions.Logging" Version="5.3.8"/>
         <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.8"/>
@@ -50,6 +51,8 @@
 
     <ItemGroup>
         <Folder Include="Application\"/>
+        <Folder Include="Caching\"/>
+        <Folder Include="Entity\EntryEntity\Repository\"/>
         <Folder Include="wwwroot\uploads\"/>
     </ItemGroup>
 

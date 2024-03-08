@@ -6,19 +6,25 @@ namespace MyWiki.Exceptions.ExceptionHandlers;
 
 public sealed class DataBaseNotFoundExceptionHandler : IExceptionHandler
 {
-    public ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception,
-        CancellationToken cancellationToken)
+    public ValueTask<bool> TryHandleAsync(
+        HttpContext httpContext,
+        Exception exception,
+        CancellationToken cancellationToken
+    )
     {
         switch (exception)
         {
             case DataBaseNotFoundException:
                 httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-                httpContext.Response.WriteAsJsonAsync(new ProblemDetails
-                {
-                    Status = StatusCodes.Status404NotFound,
-                    Detail = exception.Message,
-                    Title = "Not Found"
-                }, cancellationToken);
+                httpContext.Response.WriteAsJsonAsync(
+                    new ProblemDetails
+                    {
+                        Status = StatusCodes.Status404NotFound,
+                        Detail = exception.Message,
+                        Title = "Not Found"
+                    },
+                    cancellationToken
+                );
                 return ValueTask.FromResult(true);
             case InvalidOperationException { Message: "" }:
                 httpContext.Response.StatusCode = StatusCodes.Status404NotFound;

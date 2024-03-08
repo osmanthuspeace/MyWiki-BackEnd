@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyWiki.Entity.EntryEntity;
+using MyWiki.Entity.TagEntity;
 using MyWiki.Models.Dtos;
 using MyWiki.Service.Interface;
 
@@ -9,14 +10,15 @@ namespace MyWiki.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class EntryController(IEntryDataProvider entryDataProviderService, ILogger<EntryController> logger)
-    : ControllerBase
+public class EntryController(
+    IEntryDataProvider entryDataProviderService,
+    ILogger<EntryController> logger
+) : ControllerBase
 {
     // GET: 通过Id获取词条
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Entry>> GetEntryById(int id)
     {
-        // logger.LogError("*************{@id}******************",id);
         try
         {
             return Ok(await entryDataProviderService.GetEntryById(id));
@@ -29,7 +31,11 @@ public class EntryController(IEntryDataProvider entryDataProviderService, ILogge
 
     //GET: 通过Title获取词条
     [HttpGet("{title}")]
-    public async Task<ActionResult<List<Entry>>> GetEntriesByTitle(string title, int page = 1, int pageSize = 10)
+    public async Task<ActionResult<List<Entry>>> GetEntriesByTitle(
+        string title,
+        int page = 1,
+        int pageSize = 10
+    )
     {
         try
         {
@@ -43,8 +49,11 @@ public class EntryController(IEntryDataProvider entryDataProviderService, ILogge
 
     //GET: 通过Tags获取词条
     [HttpGet]
-    public async Task<ActionResult<ICollection<Entry>>> GetEntriesByTags([FromQuery] List<string>? tagNames,
-        int page = 1, int pageSize = 10)
+    public async Task<ActionResult<ICollection<Entry>>> GetEntriesByTags(
+        [FromQuery] List<string>? tagNames,
+        int page = 1,
+        int pageSize = 10
+    )
     {
         try
         {
@@ -58,12 +67,17 @@ public class EntryController(IEntryDataProvider entryDataProviderService, ILogge
 
     //GET: 通过Category获取词条
     [HttpGet]
-    public async Task<ActionResult<ICollection<Entry>>> GetEntriesByCategory(string categoryName, int page = 1,
-        int pageSize = 10)
+    public async Task<ActionResult<ICollection<Entry>>> GetEntriesByCategory(
+        string categoryName,
+        int page = 1,
+        int pageSize = 10
+    )
     {
         try
         {
-            return Ok(await entryDataProviderService.GetEntriesByCategory(categoryName, page, pageSize));
+            return Ok(
+                await entryDataProviderService.GetEntriesByCategory(categoryName, page, pageSize)
+            );
         }
         catch (Exception ex)
         {
@@ -119,7 +133,8 @@ public class EntryController(IEntryDataProvider entryDataProviderService, ILogge
     public async Task<IActionResult> DeleteEntry(string title)
     {
         var staff = User.FindFirstValue(ClaimTypes.Role);
-        if (staff is not "Admin") return Unauthorized("Only administrators have permission to delete entries");
+        if (staff is not "Admin")
+            return Unauthorized("Only administrators have permission to delete entries");
         try
         {
             return Ok(await entryDataProviderService.DeleteEntry(title));
@@ -142,7 +157,6 @@ public class EntryController(IEntryDataProvider entryDataProviderService, ILogge
             return NotFound(e.Message);
         }
     }
-
 
     [HttpGet]
     public async Task<ActionResult<List<Tag>>> GetTags()

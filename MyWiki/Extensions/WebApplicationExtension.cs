@@ -12,6 +12,8 @@ public static class WebApplicationExtension
         }
 
         app.UseCors("AllowSpecificOrigin");
+
+        // app.UseResponseCaching();//服务器端缓存
         // app.UseExceptionHandler(op => { });
         app.UseAuthentication();
         app.UseAuthorization();

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MyWiki.Data;
+using MyWiki.Entity.RoleEntity;
 using MyWiki.Entity.UserEntity;
 using MyWiki.Models.Dtos;
 using MyWiki.Service.Interface;
@@ -29,29 +30,32 @@ public class UserDataProvider(WikiContext context) : IUserDataProvider
     //登录
     public async Task<string> Login(LoginDto loginDto)
     {
-        var existUser = await context.Users
-            .Include(user => user.Role)
+        var existUser = await context
+            .Users.Include(user => user.Role)
             .FirstOrDefaultAsync(u => u.Name == loginDto.Name);
-        if (existUser is null) throw new Exception("The user is not exist");
-        var isPasswordValid =
-            PasswordHasher.VerifyPassword(loginDto.Password, existUser.HashedPassword, existUser.Salt);
-        if (!isPasswordValid) throw new Exception("The account or password is incorrect");
-        var user = new User
-        {
-            Name = loginDto.Name,
-            Role = existUser.Role
-        };
+        if (existUser is null)
+            throw new Exception("The user is not exist");
+        var isPasswordValid = PasswordHasher.VerifyPassword(
+            loginDto.Password,
+            existUser.HashedPassword,
+            existUser.Salt
+        );
+        if (!isPasswordValid)
+            throw new Exception("The account or password is incorrect");
+        var user = new User { Name = loginDto.Name, Role = existUser.Role };
         var token = JwtGenerator.GenerateJwt(user);
         return token;
     }
 
     public async Task<string> SetAdmin(string name)
     {
-        var targetUser = await context.Users
-            .Include(user => user.Role)
+        var targetUser = await context
+            .Users.Include(user => user.Role)
             .FirstOrDefaultAsync(u => u.Name == name);
-        if (targetUser == null) throw new Exception($"There is no user by the name of {name}");
-        if (targetUser.Role.RoleName == "Admin") return "Already an administrator";
+        if (targetUser == null)
+            throw new Exception($"There is no user by the name of {name}");
+        if (targetUser.Role.RoleName == "Admin")
+            return "Already an administrator";
         var adminUser = await GetOrCreateRole("Admin");
         targetUser.Role = adminUser;
         await context.SaveChangesAsync();
@@ -60,51 +64,49 @@ public class UserDataProvider(WikiContext context) : IUserDataProvider
 
     public async Task<IEnumerable<string>> GetUsersByRole(string roleName)
     {
-        var users = await context.Users
-            .Include(u => u.Role)
+        var users = await context
+            .Users.Include(u => u.Role)
             .Where(u => u.Role.RoleName == roleName)
             .ToListAsync();
         var userNames = users.Select(u => u.Name);
-        if (users.IsNullOrEmpty()) throw new Exception("No one belongs to this role");
+        if (users.IsNullOrEmpty())
+            throw new Exception("No one belongs to this role");
         return userNames;
     }
 
     public async Task<List<DisplayUsersDto>> GetUsers()
     {
-        var users = await context.Users.Include(u => u.Role)
-            .ToListAsync();
-        return users.Select(u => new DisplayUsersDto
-        {
-            Name = u.Name,
-            RoleName = u.Role.RoleName
-        }).ToList();
+        var users = await context.Users.Include(u => u.Role).ToListAsync();
+        return users
+            .Select(u => new DisplayUsersDto { Name = u.Name, RoleName = u.Role.RoleName })
+            .ToList();
     }
 
     public async Task<bool> CheckUserName(string name)
     {
-        if (name.IsNullOrEmpty()) return false;
+        if (name.IsNullOrEmpty())
+            return false;
         var existUser = await context.Users.FirstOrDefaultAsync(u => u.Name == name);
-        if (existUser != null) throw new Exception("该用户名已存在");
+        if (existUser != null)
+            throw new Exception("该用户名已存在");
         return false;
     }
 
     public async Task<DisplayUsersDto> GetUserInfoByName(string name)
     {
-        var user = await context.Users
-            .Include(user => user.Role)
+        var user = await context
+            .Users.Include(user => user.Role)
             .FirstOrDefaultAsync(u => u.Name == name);
-        if (user == null) throw new Exception("There is no user of the name");
-        return new DisplayUsersDto
-        {
-            Name = user.Name,
-            RoleName = user.Role.RoleName
-        };
+        if (user == null)
+            throw new Exception("There is no user of the name");
+        return new DisplayUsersDto { Name = user.Name, RoleName = user.Role.RoleName };
     }
 
     private async Task<Role> GetOrCreateRole(string roleName)
     {
         var existingRole = await context.Roles.FirstOrDefaultAsync(r => r.RoleName == roleName);
-        if (existingRole != null) return existingRole;
+        if (existingRole != null)
+            return existingRole;
         var newRole = new Role { RoleName = roleName };
         context.Roles.Add(newRole);
         await context.SaveChangesAsync();

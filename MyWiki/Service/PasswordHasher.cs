@@ -37,13 +37,7 @@ public class PasswordHasher
 
         // 使用PBKDF2验证密码
         var hashedInput = Convert.ToBase64String(
-            KeyDerivation.Pbkdf2(
-                password,
-                saltBytes,
-                KeyDerivationPrf.HMACSHA512,
-                10000,
-                256 / 8
-            )
+            KeyDerivation.Pbkdf2(password, saltBytes, KeyDerivationPrf.HMACSHA512, 10000, 256 / 8)
         );
 
         // 比较两个哈希值是否相等

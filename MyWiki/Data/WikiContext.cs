@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using MyWiki.Data.DataBaseConfiguration;
-using MyWiki.Entity;
+using MyWiki.Entity.CategoryEntity;
 using MyWiki.Entity.EntryEntity;
+using MyWiki.Entity.PictureEntity;
+using MyWiki.Entity.RoleEntity;
+using MyWiki.Entity.TagEntity;
 using MyWiki.Entity.UserEntity;
 
 namespace MyWiki.Data;
@@ -19,7 +22,7 @@ public class WikiContext(DbContextOptions<WikiContext> options) : DbContext(opti
     {
         modelBuilder.ApplyConfiguration(new UserConfig());
         modelBuilder.ApplyConfiguration(new EntryConfig());
-
+        modelBuilder.ApplyConfiguration(new CategoryConfig());
         base.OnModelCreating(modelBuilder);
     }
 }

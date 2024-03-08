@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using MyWiki.Entity.CategoryEntity;
+using MyWiki.Entity.TagEntity;
 
 namespace MyWiki.Entity.EntryEntity;
 
@@ -7,7 +9,8 @@ namespace MyWiki.Entity.EntryEntity;
 
 public class Entry
 {
-    [Key] public int EntryId { get; set; }
+    [Key]
+    public int EntryId { get; set; }
 
     public string Title { get; set; }
     public string Content { get; set; }
@@ -17,7 +20,8 @@ public class Entry
 
     public Category? Category { get; set; }
 
-    [JsonIgnore] public ICollection<Tag> Tags { get; set; } = [];
+    [JsonIgnore]
+    public ICollection<Tag> Tags { get; set; } = [];
 
     public IEnumerable<string> GetTagNames()
     {
